@@ -1,13 +1,20 @@
 package usecase
 
-type productUsecase struct {
-	// repository
+import (
+	"github.com/giordanGarci/crudventure-go/model"
+	"github.com/giordanGarci/crudventure-go/repository"
+)
+
+type ProductUsecase struct {
+	repository repository.ProductRepository
 }
 
-func NewProductUsecase() *productUsecase {
-	return &productUsecase{}
+func NewProductUsecase(repo repository.ProductRepository) ProductUsecase {
+	return ProductUsecase{
+		repository: repo,
+	}
 }
 
-func (pu *productUsecase) GetProducts() {
-	// repository.GetProducts()
+func (pu *ProductUsecase) GetProducts() ([]model.Product, error) {
+	return pu.repository.GetProducts()
 }

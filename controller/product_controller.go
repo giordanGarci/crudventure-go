@@ -4,24 +4,27 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/giordanGarci/crudventure-go/model"
+	"github.com/giordanGarci/crudventure-go/usecase"
 )
 
 type productController struct {
-	// Usecase
+	productUsecase usecase.ProductUsecase
 }
 
-func NewProductController() *productController {
-	return &productController{}
+func NewProductController(usecase usecase.ProductUsecase) productController {
+	return productController{
+		productUsecase: usecase,
+	}
+
 }
 
 func (p *productController) GetProducts(ctx *gin.Context) {
-	products := []model.Product{
-		{
-			ID:    1,
-			Name:  "Batata Frita",
-			Price: 20,
-		},
+	products, err := p.productUsecase.GetProducts()
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{
+			"message": err.Error(),
+		})
 	}
+
 	ctx.JSON(http.StatusOK, products)
 }
