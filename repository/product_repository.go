@@ -39,3 +39,23 @@ func (pr *ProductRepository) GetProducts() ([]model.Product, error) {
 
 	return productList, nil
 }
+
+func (pr *ProductRepository) CreateProduct(product model.Product) (int64, error) {
+	query := "INSERT INTO product (product_name, price) VALUES (?, ?)"
+
+	// Executa a query e obtém o resultado
+	result, err := pr.connection.Exec(query, product.Name, product.Price)
+	if err != nil {
+		fmt.Println(err)
+		return 0, err
+	}
+
+	// Obtém o ID do último registro inserido
+	id, err := result.LastInsertId()
+	if err != nil {
+		fmt.Println(err)
+		return 0, err
+	}
+
+	return id, nil
+}
