@@ -2,6 +2,7 @@ package controller
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/giordanGarci/crudventure-go/model"
@@ -34,17 +35,59 @@ func (p *productController) CreateProduct(ctx *gin.Context) {
 	var product model.Product
 	err := ctx.BindJSON(&product)
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{
-			"message": err.Error(),
-		})
+		response := model.Response{
+			Message: err.Error(),
+		}
+		ctx.JSON(http.StatusBadRequest, response)
+		return
 	}
 
 	insertedProduct, err := p.productUsecase.CreateProduct(product)
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{
-			"message": err.Error(),
-		})
+		response := model.Response{
+			Message: err.Error(),
+		}
+		ctx.JSON(http.StatusInternalServerError, response)
+		return
 	}
 
 	ctx.JSON(http.StatusCreated, insertedProduct)
+}
+
+func (p *productController) GetProductById(ctx *gin.Context) {
+	id := ctx.Param("productId")
+	if id == "" {
+		response := model.Response{
+			Message: "ID não informado",
+		}
+		ctx.JSON(http.StatusBadRequest, response)
+		return
+	}
+	product_id, err := strconv.ParseInt(id, 10, 64)
+	if err != nil {
+		response := model.Response{
+			Message: "ID inválido, precisa ser númerico",
+		}
+		ctx.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	product, err := p.productUsecase.GetProductById(product_id)
+	if err != nil {
+		response := model.Response{
+			Message: err.Error(),
+		}
+		ctx.JSON(http.StatusInternalServerError, response)
+		return
+	}
+
+	if product == nil {
+		response := model.Response{
+			Message: "Produto não encontrado",
+		}
+		ctx.JSON(http.StatusNotFound, response)
+		return
+	}
+
+	ctx.JSON(http.StatusOK, product)
 }
