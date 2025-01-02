@@ -1,75 +1,74 @@
 # Crudventure-go
 
-Crudventure-go é um projeto que implementa uma api com funcionalidades básicas para gerenciar dados de um Produto. Este projeto foi desenvolvido em Go (Golang) e tem como objetivo servir como base para aprender, implementar ou expandir aplicações que requerem operações de CRUD.
+Crudventure-go is a project that implements api system with basic functionalities to manage data struct Product. This project was developed in Go (Golang) and aims to serve as a foundation for learning, implementing, or expanding applications that require CRUD operations.
 
-## Recursos
+## Features
 
-- Implementação de uma api de criar e buscar dados.
-- Estrutura modular para facilitar manutenção e expansão.
-- Uso de boas práticas de desenvolvimento com Go.
-- Integração com bancos de dados relacionais ou não relacionais.
-- API RESTful para comunicação com o sistema.
+- Modular structure for easy maintenance and expansion.
+- Use of best practices in Go development.
+- Integration with relational or non-relational databases.
+- RESTful API for system communication.
 
-## Requisitos
+## Requirements
 
-Certifique-se de ter os seguintes requisitos instalados no seu ambiente:
+Make sure you have the following prerequisites installed in your environment:
 
-- [Go](https://go.dev/) (versão 1.18 ou superior)
+- [Go](https://go.dev/) (version 1.18 or higher)
 - [Git](https://git-scm.com/)
-- Banco de dados compatível (ex.: PostgreSQL, MySQL, SQLite)
+- Compatible database (e.g., PostgreSQL, MySQL, SQLite)
 
-## Instalação
+## Installation
 
-1. Clone o repositório:
+1. Clone the repository:
    ```bash
    git clone https://github.com/giordanGarci/crudventure-go.git
    ```
 
-2. Acesse o diretório do projeto:
+2. Navigate to the project directory:
    ```bash
    cd crudventure-go
    ```
 
-3. Instale as dependências:
+3. Install dependencies:
    ```bash
    go mod tidy
    ```
 
-4. Configure as variáveis de ambiente para conectar ao banco de dados. Use o arquivo `.env.example` como referência:
+4. Configure the environment variables to connect to the database. Use the `.env.example` file as a reference:
    ```bash
    cp .env.example .env
    ```
-   Edite o arquivo `.env` com as credenciais do seu banco de dados.
+   Edit the `.env` file with your database credentials.
 
-5. Execute a aplicação:
+5. Run the application:
    ```bash
    go run main.go
    ```
 
-## Uso
+## Usage
 
-Uma vez que a aplicação estiver em execução, você pode acessar os endpoints da API para realizar operações CRUD. Por exemplo:
+Once the application is running, you can access the API endpoints to perform CRUD operations. For example:
 
-- **GET** `/produtcs`: Listar todos os itens.
-- **POST** `/produtcs`: Criar um novo item.
-- **GET** `/produtc/{id}`: Atualizar um item existente.
+- **GET** `/products`: List all items.
+- **POST** `/product`: Create a new item.
+- **GET** `/product/{id}`: Get an existing product.
 
-## Contribuição
+## Contribution
 
-Fique à vontade para contribuir com melhorias para o projeto. Siga estas etapas para contribuir:
+Feel free to contribute improvements to the project. Follow these steps to contribute:
 
-1. Faça um fork do repositório.
-2. Crie uma branch para sua contribuição:
+1. Fork the repository.
+2. Create a branch for your contribution:
    ```bash
-   git checkout -b minha-contribuicao
+   git checkout -b my-contribution
    ```
-3. Faça commit das suas alterações:
+3. Commit your changes:
    ```bash
-   git commit -m "Descrição das alterações"
+   git commit -m "Description of changes"
    ```
-4. Envie as alterações para o seu fork:
+4. Push the changes to your fork:
    ```bash
-   git push origin minha-contribuicao
+   git push origin my-contribution
    ```
-5. Abra um Pull Request no repositório original.
+5. Open a Pull Request on the original repository.
 
